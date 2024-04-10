@@ -1,0 +1,501 @@
+@import './variables';
+@import './mixins';
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: $sideBarBgColor;
+}
+main{
+    position: relative;
+    .glow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        border-width: 10px;
+        box-shadow: 0 0 150px 150px  rgba(255, 255, 255, 0.05);
+        pointer-events: none; 
+        z-index: 10;
+      }
+    .sidebar{
+        background-color:$sideBarBgColor;
+        color: $fontLightColor;
+        @media (min-width: 768px) {
+            &{
+                width: 40vw;
+                position: fixed;
+                padding-top: $topGap;
+                padding-left: $bigScreenSidePadding;
+                height: 100vh;
+                flex-shrink: 0;
+              }
+          }
+        .headerImage{
+            width: 100%;
+            height: 250px;
+            background-color: rgb(87, 29, 3);
+            overflow: hidden;
+            @media (min-width: 768px) {
+                &{
+                    height: 150px;
+                }
+            }
+            p:hover{
+                mix-blend-mode:lighten;
+                font-size: 8px;
+            }
+            p{
+                width: 100%;
+                height: 100%;
+                font-size: 4px;
+                background-image: url(/images/photo-1478098711619-5ab0b478d6e6.avif);
+                background-size:cover;
+                background-position: center;
+                background-clip: text;
+                filter: grayscale(0.7);
+                mix-blend-mode: hard-light;
+                transition: 1s ease-in;
+            }
+        }  
+        h1,.shortText,#socialMediaIcon{
+            margin-top: $betweenGap;
+            margin-left: $sideGap;
+            margin-right: $sideGap;
+            @media (min-width: 768px) {
+                &{
+                    margin-left: 0;
+                }
+            }
+
+        }
+        #socialMediaIcon{
+            padding-bottom:  $betweenGap;
+            display: flex;
+            @media (min-width: 768px) {
+                &{
+                    margin-top: 10%;
+                }
+            }
+            .iconBox{
+                text-decoration: none;
+                color: $fontLightColor;
+                margin-right: 3%;
+                transition: 1.5s;
+                font-size: 1.2rem;
+                &:hover{
+                    transform: scale(1.5) rotate(360deg);
+                }
+            }
+        }
+    }
+    #navOptions{
+        background-color: $sideBarBgColor;
+        padding-left: $sideGap;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        position: sticky;
+        top: 0;
+        background-color: #666;
+        z-index: 5;
+        @media (min-width: 768px) {
+            &{
+                width: 200px;
+                display: initial;
+                position: fixed;
+                padding-left: $bigScreenSidePadding;
+                top: 75vh;
+                background-color: $sideBarBgColor;
+            }
+        }
+        .menuOption{
+            width: auto;
+            height: 30px;
+            display: flex;
+            position: relative;
+            background-color: #666;
+            @media (min-width: 768px) {
+                background-color: $sideBarBgColor;
+            }
+        }
+        .menuAndhor,.menuAndhor::after{
+            height: 100%;
+            display: block;
+            display: flex;
+            align-items: center;
+            text-decoration:none;
+            text-transform: uppercase;
+            color: black;
+            @media (min-width: 768px) {
+                color: $fontGrayColor;
+            }
+            letter-spacing: 2px;
+        }
+        .smallbox{
+            width: $smallBoxWidth;
+            height: 100%;
+        }
+        .aboutSmallbox{
+            background-color: $aboutBgColor;
+        }
+        .cvSmallbox{
+            background-color: $cvBgColor;
+        }
+        .projectsSmallbox{
+            background-color: $projectsBgColor;
+        }
+        .menuAndhor::after{
+            position: absolute;
+            color: $fontLightColor;
+            width: 0;
+            overflow: hidden;
+            left: $smallBoxWidth;
+            transition: width 1s ease-in-out;
+        }
+        .aboutAnchor::after{
+            content: "\00a0 About";
+            background-color:#5366C3 ;
+        }
+        .cvAnchor::after{
+            content: "\00a0 Experience";
+            background-color:#3F83C0 ;
+        }
+        .projectsAnchor::after{
+            content: "\00a0 Projects";
+            background-color:#2AA1BD ;
+        }
+        .menuOption:hover{
+            .menuAndhor::after{
+                width: calc($menuWidth - $smallBoxWidth);
+            }
+        }
+    }
+    .sections{
+        background-color: $sideBarBgColor;
+        color: $fontLightColor;
+        padding: $topGap $sideGap;
+        @media (min-width: 768px) {
+            &{
+                margin-left: 40%;
+                padding-right: $bigScreenSidePadding;
+                padding-left: $bigScreenSidePadding;
+            }
+        }
+        #about,#cv,#projects{
+            padding: 20px;
+            margin-bottom: $betweenGap;
+            border-radius: 3px;
+            position: relative;
+            // .rightEcke{
+            //     width: 0;
+            //     height: 0;
+            //     position: absolute;
+            //     right: -1px;
+            //     top: -1px;
+            //     background-color: red;
+            //     border-top: 16px solid $sideBarBgColor;
+            //     border-right: 16px solid $sideBarBgColor;
+            //     border-bottom: 16px solid red;
+            //     border-left: 16px solid blue;
+            // }
+        }
+        #about{
+            border: 1px solid $aboutBgColor;
+            .rightEcke{
+                @include paperRightEcke;
+                border-bottom: $rightEckeLang solid $aboutBgColor;
+                border-left: $rightEckeLang solid $aboutBgColor;
+            }
+            h2{
+                @include sectionTitle;
+            }
+            .selfPic{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-image: url(/images/IMG_8410.jpg);
+                background-size: cover;
+                background-position: center;
+                float: right;
+                margin: 5px;
+            }
+        }
+        #cv{
+            border: 1px solid $cvBgColor;
+            .rightEcke{
+                @include paperRightEcke;
+                border-bottom: $rightEckeLang solid $cvBgColor;
+                border-left: $rightEckeLang solid $cvBgColor;
+            }
+            h2{
+                @include sectionTitle;
+            }
+            .workExp{
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                margin-bottom: $betweenGap;
+                span{
+                    @include skillSpan;
+                }
+            }
+            #hausefrau{
+                height: 140px;
+                overflow: hidden;
+                #flipperContainer{
+                    perspective: 1000px; /* 视角，影响翻转的视觉效果 */
+                    &:hover #flipper{
+                        transform: rotateX(180deg); /* 当鼠标悬停在容器上时，翻转180度 */
+                    }
+                    #flipper{
+                        transition: 0.6s; 
+                        transform-style: preserve-3d; 
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        #back {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            padding: $betweenGap;
+                            backface-visibility: hidden; 
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #666;
+                            transform: rotateX(180deg); 
+                        }
+                        #front{
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+            .cvAction{
+                .buttonItem {
+                    text-decoration: none;
+                    color: $fontLightColor;
+                    padding: 0.5rem 1rem;
+                    display: inline-block;
+                    transform: translateY(0);
+                    text-align: center;
+                    width: 150px;
+                    height: 30px;
+                    background: $cvBgColor;
+                    box-shadow: 0 0 3px 1px rgba(246, 244, 244, 0.5);
+                    transition: 0.3s;
+                    margin-right: $betweenGap;
+                    margin-bottom: $betweenGap;
+                    border-radius: 5px;
+                }
+                .buttonItem:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 3px 10px 2px rgba(249, 248, 248, 0.5);
+                }
+            }
+        }
+        #projects{
+            border: 1px solid $projectsBgColor;
+            .rightEcke{
+                @include paperRightEcke;
+                border-bottom: $rightEckeLang solid $projectsBgColor;
+                border-left: $rightEckeLang solid $projectsBgColor;
+            }
+            h2{
+                @include sectionTitle;
+            }
+            .projectItem{
+                display: flex;
+                margin-bottom: $betweenGap;
+                .projectLink{
+                    img{
+                        width: 100px;
+                        height: 80px;
+                    }
+                } 
+                .projectTitle{
+                    margin-left: 20%;
+                    span{
+                        @include skillSpan;
+                    }
+                }
+            }
+
+        }
+    }
+}
+footer{
+    display: grid;
+    grid-template-columns: auto 150px 1fr;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    z-index: -1;
+    height: 200px;
+    @media (min-width: 768px) {
+        &{
+            margin-right: $bigScreenSidePadding;
+        }
+    }
+    .space{
+        width: 30px;
+        @media (min-width: 768px) {
+            &{
+                width: calc(40vw + 45px);
+                height: 100%;
+                background-color: $sideBarBgColor;
+            }
+        }
+    }
+    .wraper{
+        background-color: $fontLightColor;
+        margin-left: 15%;
+        margin-top: 10px;
+        .githubIcon{
+            display: block;
+            width: 128px;
+            height: 128px;
+            position: relative;
+            background-image: url(/images/github-logo_icon-icons.com_73546.png);
+            animation: righthand linear infinite;
+            animation-duration: 3s;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 64px;
+                width: 64px;
+                height: 128px;
+                background-image: url(/images/github-logo_icon-icons.com_73546.png);
+                transform: scaleX(-1);
+            }
+            .eye1{
+                width: 12px;
+                height: 5px;
+                border-radius: 49% 51% 45% 55% / 100% 100% 0% 0% ;
+                background-color: #666;
+                position: absolute;
+                top: 58px;
+                left: 40px;
+                transform: scale(0);
+                animation: eyes 3s linear infinite;
+                &::before{
+                    content: "";
+                    width: 12px;
+                    height: 3px;
+                    border-radius: 49% 51% 45% 55% / 100% 100% 0% 0% ;
+                    background-color: white;
+                    position: absolute;
+                    top: 3px;
+                    left: 0;
+                }
+            }
+            .eye2{
+                width: 12px;
+                height: 5px;
+                border-radius: 49% 51% 45% 55% / 100% 100% 0% 0% ;
+                background-color: #666;
+                position: absolute;
+                top: 58px;
+                left: 73px;
+                transform: scale(0);
+                animation: eyes linear infinite;
+                animation-duration: 3s;
+                &::before{
+                    content: "";
+                    width: 12px;
+                    height: 3px;
+                    border-radius: 49% 51% 45% 55% / 100% 100% 0% 0% ;
+                    background-color: white;
+                    position: absolute;
+                    top: 3px;
+                    left: 0;
+                }
+            }           
+            @keyframes righthand {
+                from {
+                    width: 64px;
+                }
+                79%{
+                    width: 64px;
+                }
+                80%{
+                    width: 128px;
+                }
+                to{
+                    width: 128px;
+                }
+            }
+            @keyframes eyes{
+                from {
+                    transform: scale(1);
+                }
+                79%{
+                    transform: scale(1);
+                }
+                80%{
+                    transform: scale(0);
+                }
+                to{
+                    transform: scale(0);
+                }
+            }
+         }
+    }
+    .textwraper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: $fontGrayColor;
+        padding-left: 30px;
+        .copyrightBall{
+            width: 1rem;
+            height: 1rem;
+            animation: ballMove 3s linear infinite;
+        }
+    }
+    @keyframes ballMove {
+        from{
+            transform: translateX(0) translateY(0);
+        }
+        10%{
+            transform: translateX(50px) translateY(70px) ;
+        }
+        16%{
+            transform: translateX(70px) translateY(40px);
+        }
+        25%{
+            transform: translateX(100px) translateY(70px) rotate(0);
+        }
+
+        to{
+            transform: translateX(40vw) translateY(70px) rotate(360deg);
+        }
+    }
+    @media (min-width: 768px) {
+        @keyframes ballMove {
+            from{
+                transform: translateX(0) translateY(0);
+            }
+            10%{
+                transform: translateX(50px) translateY(70px) ;
+            }
+            16%{
+                transform: translateX(70px) translateY(40px);
+            }
+            25%{
+                transform: translateX(100px) translateY(70px) rotate(0);
+            }
+    
+            to{
+                transform: translateX(300px) translateY(70px) rotate(360deg);
+            }
+        }
+    
+    }
+}
