@@ -285,7 +285,7 @@ main{
                     text-align: center;
                     width: 150px;
                     height: 30px;
-                    background: $cvBgColor;
+                    background-color: $buttonCvColor;
                     box-shadow: 0 0 3px 1px rgba(246, 244, 244, 0.5);
                     transition: 0.3s;
                     margin-right: $betweenGap;
@@ -331,11 +331,11 @@ main{
 footer{
     display: grid;
     grid-template-columns: auto 150px 1fr;
-    position: sticky;
+    // position: sticky;
     bottom: 0;
     left: 0;
     background-color: white;
-    z-index: -1;
+    z-index: 100;
     height: 200px;
     @media (min-width: 768px) {
         &{
