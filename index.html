@@ -6,16 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        document.addEventListener('mousemove', function(e) {
-                        const glow = document.querySelector('.glow');
-                        const x = e.pageX;
-                        const y = e.pageY;
-                        glow.style.transform = `translate(${x}px, ${y}px)`;
-                        });
-
-    </script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <main>
@@ -39,7 +30,7 @@
             <div id="socialMediaIcon">
                 <a class="iconBox" href="https://github.com/SelinLiu2023" target="_blank"><i class="fa-brands fa-github"></i></a>
                 <a class="iconBox"  href="#"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="mailto:xiangyu.liu@gmx.de" class="iconBox"><i class="fa-solid fa-envelope"></i></a>
+                <a href="mailto:xiangyu.liu@gmx.de" class="iconBox" id="emailToMe"><i class="fa-solid fa-envelope"></i></a>
                 <a href="tel:015759898678" class="iconBox"><i class="fa-solid fa-phone"></i></a>
             </div>
 
@@ -169,21 +160,21 @@
                 <div class="rightEcke"></div>
                 <h2>Projects</h2>
                 <div class=" projectItem">
-                    <a href="https://selinliu2023.github.io/PhotoGalleryProject/" class=" projectLink" target="_blank"><img src="/images/photogalary.gif" alt="galary"></a>
+                    <a href="https://selinliu2023.github.io/PhotoGalleryProject/" class=" projectLink" target="_blank"><img src="./images/photogalary.gif" alt="galary"></a>
                     <div class="projectTitle">
                         <p>Photo Galary</p>
                         <span>HTML</span><span>CSS</span>
                     </div>
                 </div>
                 <div class=" projectItem">
-                    <a href="https://selinliu2023.github.io/Challenge-Start-master/" class=" projectLink" target="_blank"><img src="/images/tindog.png" alt="tindog"></a>
+                    <a href="https://selinliu2023.github.io/Challenge-Start-master/" class=" projectLink" target="_blank"><img src="./images/tindog.png" alt="tindog"></a>
                     <div class="projectTitle">
                         <p>Social platform for dogs</p>
                         <span>HTML</span><span>SASS</span><span>Bootstrap</span>
                     </div>
                 </div>
                 <div class=" projectItem">
-                    <a href="https://github.com/DCI-WD-TZ-23-D01/uib-interactions-animated-portfolio-SelinLiu2023.git" class=" projectLink" target="_blank"><img src="/images/portfolio.png" alt="animated"></a>
+                    <a href="https://github.com/DCI-WD-TZ-23-D01/uib-interactions-animated-portfolio-SelinLiu2023.git" class=" projectLink" target="_blank"><img src="./images/portfolio.png" alt="animated"></a>
                     <div class="projectTitle">
                         <p>portfolio</p>
                         <span>HTML</span><span>CSS</span>
@@ -201,13 +192,29 @@
                 <div class="eye2"></div>
             </div>
         </div>
-        <div class="textwraper">
+        <div class="textwraper" id="textBox">
             <p>Do you want to hire me? </p>
             <p>Please contact me.</p>
-            <a href="#">try click on me</a>
+            <a href="#emailToMe">try click on me</a>
             <div class="copyrightBall"><i class="fa-solid fa-copyright fa-lg"></i></div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+        const glow = document.querySelector('.glow');
+        const x = e.pageX;
+        const y = e.pageY;
+        glow.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        const container = document.getElementById("textBox");
+        function updateContainerWidth() {
+            const containerWidth = `${container.clientWidth}px`;
+            container.style.setProperty('--container-width', containerWidth);
+            // console.log('--container-width:', containerWidth);
+        }
+        window.addEventListener('resize', updateContainerWidth);
+        updateContainerWidth();
+    </script>
 
 </body>
 </html>
