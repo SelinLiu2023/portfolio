@@ -55,7 +55,7 @@ main{
                 width: 100%;
                 height: 100%;
                 font-size: 4px;
-                background-image: url("./images/photo-1478098711619-5ab0b478d6e6.avif");
+                background-image: url("../images/photo-1478098711619-5ab0b478d6e6.avif");
                 background-size:cover;
                 background-position: center;
                 background-clip: text;
@@ -208,7 +208,7 @@ main{
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
-                background-image: url("./images/IMG_8410.jpg");
+                background-image: url("../images/IMG_8410.jpg");
                 background-size: cover;
                 background-position: center;
                 float: right;
@@ -351,7 +351,7 @@ footer{
             width: 128px;
             height: 128px;
             position: relative;
-            background-image: url("./images/github-logo_icon-icons.com_73546.png");
+            background-image: url("../images/github-logo_icon-icons.com_73546.png");
             animation: righthand linear infinite;
             animation-duration: $footerAnimationDuration;
             &::before{
@@ -361,7 +361,7 @@ footer{
                 left: 64px;
                 width: 64px;
                 height: 128px;
-                background-image: url("./images/github-logo_icon-icons.com_73546.png");
+                background-image: url("../images/github-logo_icon-icons.com_73546.png");
                 transform: scaleX(-1);
             }
             .eye1{
