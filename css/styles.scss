@@ -1,5 +1,6 @@
-@import './variables';
-@import './mixins';
+@use './variables' as *;
+@use './mixins' as *;
+
 *{
     margin: 0;
     border: 0;
@@ -23,30 +24,17 @@ main{
         box-shadow: 0 0 150px 150px  rgba(255, 255, 255, 0.1);
         pointer-events: none; 
         z-index: 10;
-      }
+    }
     .sidebar{
         background-color:$sideBarBgColor;
         color: $fontLightColor;
-        @media (min-width: 768px) {
-            &{
-                width: 40vw;
-                position: fixed;
-                padding-top: $topGap;
-                padding-left: $bigScreenSidePadding;
-                height: 100vh;
-                flex-shrink: 0;
-              }
-          }
+
         .headerImage{
             width: 100%;
             height: 250px;
             background-color: rgb(87, 29, 3);
             overflow: hidden;
-            @media (min-width: 768px) {
-                &{
-                    height: 150px;
-                }
-            }
+
             p:hover{
                 mix-blend-mode:lighten;
                 font-size: 8px;
@@ -62,6 +50,11 @@ main{
                 filter: grayscale(0.7);
                 mix-blend-mode: hard-light;
                 transition: 1s ease-in;
+            }
+            @media (min-width: 768px) {
+                &{
+                    height: 150px;
+                }
             }
         }  
         h1,.shortText,#socialMediaIcon{
@@ -94,6 +87,16 @@ main{
                 }
             }
         }
+        @media (min-width: 768px) {
+            &{
+                width: 40vw;
+                position: fixed;
+                padding-top: $topGap;
+                padding-left: $bigScreenSidePadding;
+                height: 100vh;
+                flex-shrink: 0;
+            }
+        }
     }
     #navOptions{
         background-color: $sideBarBgColor;
@@ -105,16 +108,6 @@ main{
         top: 0;
         background-color: #666;
         z-index: 5;
-        @media (min-width: 768px) {
-            &{
-                width: 200px;
-                display: initial;
-                position: fixed;
-                padding-left: $bigScreenSidePadding;
-                top: 75vh;
-                background-color: $sideBarBgColor;
-            }
-        }
         .menuOption{
             width: auto;
             height: 30px;
@@ -133,10 +126,11 @@ main{
             text-decoration:none;
             text-transform: uppercase;
             color: black;
+            letter-spacing: 2px;
+
             @media (min-width: 768px) {
                 color: $fontGrayColor;
             }
-            letter-spacing: 2px;
         }
         .smallbox{
             width: $smallBoxWidth;
@@ -176,24 +170,21 @@ main{
                 width: calc($menuWidth - $smallBoxWidth);
             }
         }
+        @media (min-width: 768px) {
+            &{
+                width: 200px;
+                display: initial;
+                position: fixed;
+                padding-left: $bigScreenSidePadding;
+                top: 75vh;
+                background-color: $sideBarBgColor;
+            }
+        }
     }
     .sections{
         background-color: $sideBarBgColor;
         color: $fontLightColor;
         padding: $topGap $sideGap;
-        @media (min-width: 768px) {
-            &{
-                margin-left: 40%;
-                padding-right: $bigScreenSidePadding;
-                padding-left: $bigScreenSidePadding;
-            }
-        }
-        #about,#cv,#projects{
-            padding: 20px;
-            margin-bottom: $betweenGap;
-            border-radius: 3px;
-            position: relative;
-        }
         #about{
             border: 1px solid $aboutBgColor;
             .rightEcke{
@@ -218,9 +209,9 @@ main{
         #cv{
             border: 1px solid $cvBgColor;
             .rightEcke{
-                @include paperRightEcke;
                 border-bottom: $rightEckeLang solid $cvBgColor;
                 border-left: $rightEckeLang solid $cvBgColor;
+                @include paperRightEcke;
             }
             h2{
                 @include sectionTitle;
@@ -229,8 +220,23 @@ main{
                 display: grid;
                 grid-template-columns: 100px 1fr;
                 margin-bottom: $betweenGap;
+                height: auto;
+                overflow: visible;
                 span{
                     @include skillSpan;
+                }
+                @media (max-width: 768px) {
+                    display: flex;
+                    flex-direction: column;        // 改成竖着排
+                    // align-items: center;           // 图片和文字居中（可选）
+                
+                    p, span {
+                        text-align: left;
+                    }
+                    .workYears{
+                        display: flex;
+                        gap:1px;
+                    }
                 }
             }
             #hausefrau{
@@ -258,10 +264,35 @@ main{
                             align-items: center;
                             background-color: #666;
                             transform: rotateX(180deg); 
+                            min-height: 100%;
+                            box-sizing: border-box;
                         }
                         #front{
                             position: absolute;
                         }
+                    }
+                }
+                @media (max-width: 768px) {
+                    height: auto !important;
+                    overflow: visible !important;
+                
+                    #flipperContainer {
+                    perspective: none;
+                    }
+                
+                    #flipper {
+                    transform: none !important;
+                    height: auto !important;
+
+                    }
+                
+                    #front, #back {
+                    position: static !important;
+                    transform: none !important;
+                    backface-visibility: visible !important;
+                    display: block !important;
+                    margin-top: 10px;
+
                     }
                 }
             }
@@ -290,10 +321,15 @@ main{
         }
         #projects{
             border: 1px solid $projectsBgColor;
+        #projectItems{
+                display: flex;
+                flex-direction: column;
+                gap: 50px;
+            }
             .rightEcke{
-                @include paperRightEcke;
                 border-bottom: $rightEckeLang solid $projectsBgColor;
                 border-left: $rightEckeLang solid $projectsBgColor;
+                @include paperRightEcke;
             }
             h2{
                 @include sectionTitle;
@@ -313,9 +349,37 @@ main{
                         @include skillSpan;
                     }
                 }
+                @media (max-width: 768px) {
+                    flex-direction: column;        // 改成竖着排
+                    align-items: center;           // 图片和文字居中（可选）
+                
+                    .projectTitle {
+                      margin-left: 0;              // 去掉原来的左边距
+                      text-align: center;          // 可选：文字居中对齐
+                    }
+                
+                    .projectLink {
+                      margin-bottom: 10px;         // 可选：图和文字之间加点距离
+                    }
+                    p, span {
+                        text-align: left;
+                    }
+                }
             }
-
         }
+        #about,#cv,#projects{
+            padding: 20px;
+            margin-bottom: $betweenGap;
+            border-radius: 3px;
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            &{
+                margin-left: 40%;
+                padding-right: $bigScreenSidePadding;
+                padding-left: $bigScreenSidePadding;
+            }
+        }    
     }
 }
 footer{
@@ -327,11 +391,6 @@ footer{
     background-color: white;
     z-index: -1;
     height: 200px;
-    @media (min-width: 768px) {
-        &{
-            margin-right: $bigScreenSidePadding;
-        }
-    }
     .space{
         width: 30px;
         @media (min-width: 768px) {
@@ -465,6 +524,11 @@ footer{
         }
         to{
             transform: translateX(calc(var(--container-width) - 1rem))  translateY(50px) rotate(360deg);
+        }
+    }
+    @media (min-width: 768px) {
+        &{
+            margin-right: $bigScreenSidePadding;
         }
     }
 }
